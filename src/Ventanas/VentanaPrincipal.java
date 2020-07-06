@@ -187,7 +187,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnCambiarRuta.setText("Cambiar ruta");
+        btnCambiarRuta.setText("Actualizar ruta");
         btnCambiarRuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCambiarRutaActionPerformed(evt);
@@ -268,6 +268,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Gestionar");
 
+        CrearMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         CrearMenuItem.setText("Crear");
         CrearMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(CrearMenuItem);
 
+        EliminarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         EliminarMenuItem.setText("Eliminar");
         EliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +286,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(EliminarMenuItem);
 
+        RenombrarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         RenombrarMenuItem.setText("Renombrar");
         RenombrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +332,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             int elitodo = jLista.getSelectedIndex();
             lista.removeAllElements();
+            btnArchivosActionPerformed(evt);
         }
     }//GEN-LAST:event_btnArchivosActionPerformed
 
@@ -346,6 +350,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             int elitodo = jLista.getSelectedIndex();
             lista.removeAllElements();
+            btnDirectoriosActionPerformed(evt);
         }
     }//GEN-LAST:event_btnDirectoriosActionPerformed
 
@@ -360,6 +365,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             int elitodo = jLista1.getSelectedIndex();
             lista1.removeAllElements();
+            btnInformacionActionPerformed(evt);
         }
     }//GEN-LAST:event_btnInformacionActionPerformed
 
@@ -367,6 +373,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String nombre;
         nombre = txtRuta.getText() + "\\" + JOptionPane.showInputDialog("Nombre del directorio");
         controladorDirectorio.crearDirectorio(nombre);
+        btnDirectoriosActionPerformed(evt);
     }//GEN-LAST:event_CrearMenuItemActionPerformed
 
     private void btnCambiarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarRutaActionPerformed
@@ -384,6 +391,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             int elitodo = jLista.getSelectedIndex();
             lista.removeAllElements();
+            btnDirectoriosOcultosActionPerformed(evt);
         }
     }//GEN-LAST:event_btnDirectoriosOcultosActionPerformed
 
@@ -395,6 +403,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String nuevo;
         nuevo = txtRuta.getText() + "\\" + JOptionPane.showInputDialog("Nuevo nombre del directorio");
         controladorDirectorio.renombrarDirectorio(actual, nuevo);
+        btnDirectoriosActionPerformed(evt);
     }//GEN-LAST:event_RenombrarMenuItemActionPerformed
 
     private void EliminarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarMenuItemActionPerformed
@@ -402,7 +411,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int seleccionado = jLista.getSelectedIndex();
         String eliminar;
         eliminar = lista.get(seleccionado) + "";
+        if(eliminar.charAt(0) != 'C'){
+            eliminar = txtRuta.getText() + "\\" + lista.get(seleccionado);
+        }
         controladorDirectorio.eliminarDirectorio(eliminar);
+        btnDirectoriosActionPerformed(evt);
     }//GEN-LAST:event_EliminarMenuItemActionPerformed
 
     /**
